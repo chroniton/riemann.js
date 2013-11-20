@@ -92,7 +92,7 @@ RiemannJS.complex.prototype.accum = function(z) {
 };
 
 RiemannJS.complex.prototype.exp = function() {
-  var vz = new RiemannJS.complex(1e-50,this.i);
+  var vz = new RiemannJS.complex(1e-100,this.i);
   var va = vz.abs();
   return vz.div(va)
     .mul( Math.sin(va) )
