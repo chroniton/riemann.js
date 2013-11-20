@@ -92,12 +92,12 @@ RiemannJS.complex.prototype.accum = function(z) {
 };
 
 RiemannJS.complex.prototype.exp = function() {
-  var x = 0;
-  var s = new RiemannJS.complex(0.0,0.0);
-  for (var x = 0; x < 30; x++) {
-    s.accum( this.pow(x).div(RiemannJS.factorial(x)) )
-  }
-  return s;
+  var vz = new RiemannJS.complex(1e-50,this.i);
+  var va = vz.abs();
+  return vz.div(va)
+    .mul( Math.sin(va) )
+    .add( Math.cos(va) )
+    .mul( Math.pow(Math.E, this.r) );
 };
 
 RiemannJS.complex.prototype.ln = function() {
