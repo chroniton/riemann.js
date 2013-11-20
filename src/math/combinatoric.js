@@ -3,9 +3,16 @@ RiemannJS.factorial = function(n) {
   for (var k = 1; k <= n; k++) {
     nf *= k;
   }
-  return nf;
+  return Math.round(nf);
 };
 
 RiemannJS.binomial = function(n, k) {
-  return RiemannJS.factorial(n) / (RiemannJS.factorial(k) * RiemannJS.factorial(n-k));
+  if (n == k) {
+    return 1;
+  } else if (k > n) {
+    return 0;
+  }
+  return Math.round(
+     RiemannJS.factorial(n) / (RiemannJS.factorial(k) * RiemannJS.factorial(n-k))
+     );
 };
