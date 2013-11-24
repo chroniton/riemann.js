@@ -1,0 +1,97 @@
+body {
+  font-family: monospace;
+  background-color: #080808;
+  color: #5f87af;
+}
+
+#wallpaper-app {
+  margin-left: 16px;
+  width: 900px;
+}
+
+#wallpaper-app #chart-container {
+  display: inline-block;
+  border-left: 1px dashed #5f8787;
+  padding-left: 16px;
+}
+
+#riemann canvas {
+  border 1px solid black;
+}
+
+#wallpaper-app #control-panel {
+  float: left;
+  margin-right: 32px;
+  min-height: 300px;
+}
+
+#wallpaper-app input {
+  background-color: #080808;
+  color: #af5f00;
+}
+#wallpaper-app input:hover {
+  background-color: #1f1f1f;
+  color: #5f8787;
+}
+#wallpaper-app input:focus {
+  background-color: #2e2e2e;
+  color: rgba( 135, 255, 135, 1.0 );
+}
+
+#wallpaper-app input.chart-dom, input.chart-res, input.chart-rgba, input.chart-fn {
+  width: 42px;
+  text-align: right;
+  border: none;
+  margin: none;
+}
+
+#wallpaper-app input.chart-res {
+  width: 32px;
+}
+
+#wallpaper-app #y-res {
+  text-align: left;
+}
+
+#wallpaper-app #y-res, input.chart-rgba {
+  width: 64px;
+  text-align: left;
+}
+
+#wallpaper-app input.chart-fn {
+  text-align: left;
+  width: 160px;
+}
+
+#wallpaper-app #render-panel {
+  margin-top: 8px;
+}
+#wallpaper-app #render-control {
+
+  float: left;
+}
+#wallpaper-app #render-status {
+  float: right;
+  display: inline-block;
+}
+
+#wallpaper-app .ui-section {
+  margin-bottom: 8px;
+
+}
+
+body h1 {
+  color: rgba(0, 95, 95, 1.0);
+}
+
+#wallpaper-app button {
+  border: none;
+  background-color: rgba(0, 95, 95, 1.0);
+  color: rgba( 135, 255, 135, 1.0 );
+  border-radius: 4px;
+  padding: 4px 6px 4px 6px;
+}
+
+#wallpaper-app #chart-download {
+  color: rgba( 135, 255, 135, 1.0 );
+}

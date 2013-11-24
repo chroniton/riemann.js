@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>riemann.js</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <!-- RiemannJS modules -->
+    <script src="../src/riemann.js"></script>
+    <script src="../src/math/combinatoric.js"></script>
+    <script src="../src/math/complex.js"></script>
+    <script src="../src/math/zeta.js"></script>
+
+    <script src="../src/context.js"></script>
+    <script src="../src/chart.js"></script>
+
+    <!-- math testing -->
+    <!--
+    <script src="../src/math/test.combinatoric.js"></script>
+    <script src="../src/math/test.complex.js"></script>
+    <script src="../src/math/test.zeta.js"></script>
+    -->
+    <!-- externally generated chart data -->
+    <!-- <script src="zetaplane.js"></script> -->
+
+    <!-- jQuery for the wallpaper generator UI -->
+    <script src="./jquery.js"></script>
+    <script src="chart.js"></script>
+  </head>
+  <body>
+    <h1>colorwheel graph generator</h1>
+    <div id="wallpaper-app">
+      <div id="chart-container">
+        <div id="riemann"></div>
+        <div id="render-panel">
+          <div id="render-control">
+            <button class="render-control" id="btn-pause">Pause</button>
+            <button class="render-control" id="btn-resume">Resume</button>
+          </div>
+          <div id="render-status" style="display: none;">
+            rendering:
+            <span id="pixels-rendered"></span> / <span id="pixels-total"></span>
+          </div>
+          <a id="chart-download" href="#">Download Image</a>
+        </div>
+      </div>
+
+      <div id="control-panel">
+        <div id="function-control">
+          <div class="ui-section">
+            <label>f(s) =</label>
+            <input class="chart-cfg chart-fn" id="fn-chart" type="text" value="zeta(s)" />
+          </div>
+
+          <div class="ui-section">
+            <label>Re(s) &#x2208;</label>
+            [
+            <input class="chart-cfg chart-dom" id="dom-xmin" type="text" value="-17.5" />,
+            <input class="chart-cfg chart-dom" id="dom-xmax" type="text" value="5" />
+            ]
+
+            <br />
+            <label>Im(s) &#x2208;</label>
+            [
+            <input class="chart-cfg chart-dom" id="dom-ymin" type="text" value="-30" />,
+            <input class="chart-cfg chart-dom" id="dom-ymax" type="text" value="30" />
+            ]
+          </div>
+
+          <div class="ui-section">
+            <label>&#x0398;r =</label>
+            <input class="chart-cfg chart-rgba" id="r-axis" type="text" value="0" />
+            <br />
+            <label>&#x0398;g =</label>
+            <input class="chart-cfg chart-rgba" id="g-axis" type="text" value="2*pi/3" />
+            <br />
+            <label>&#x0398;b =</label>
+            <input class="chart-cfg chart-rgba" id="b-axis" type="text" value="4*pi/3" />
+          </div>
+
+          <div class="ui-section">
+            <label>hue(z) =</label>
+            <input class="chart-cfg chart-fn" id="fn-hue" type="text" value="abs(1/(1-abs(z)))" />
+            <br />
+            <label>alpha(z) =</label>
+            <input class="chart-cfg chart-fn" id="fn-alpha" type="text" value="1" />
+          </div>
+
+        </div>
+
+        <div id="render-control">
+          <div class="ui-section">
+            <label>Dimensions:</label>
+            <input class="chart-cfg chart-res" id="x-res" type="text" value="480" />x<input class="chart-cfg chart-res" id="y-res" type="text" value="300" />
+            <br />
+            <input class="render-control" id="render-preview" type="checkbox" checked='true' />
+            <label>render preview</label>
+          </div>
+          <div class="ui-section">
+            <button id="btn-render">Render!</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>
