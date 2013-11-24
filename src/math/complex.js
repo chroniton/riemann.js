@@ -36,22 +36,6 @@ RiemannJS.complex.prototype.div = function(z) {
   }
 };
 
-RiemannJS.complex.prototype.pow = function(z) {
-  if (typeof z == "number") {
-    var a = this.arg();
-    var t = new RiemannJS.complex(Math.cos(z*a), Math.sin(z*a));
-    return t.mul(Math.pow(this.abs(),z));
-  } else {
-    return z.mul(this.ln()).exp();
-  }
-};
-
-RiemannJS.complex.prototype.root = function(n) {
-  var a = this.arg();
-  var w = new RiemannJS.complex(Math.cos(a/n), Math.sin(a/n));
-  return w.mul(Math.pow(this.abs(),1.0/n));
-};
-
 RiemannJS.complex.prototype.neg = function() {
   return new RiemannJS.complex(-this.r, -this.i);
 };
@@ -65,7 +49,7 @@ RiemannJS.complex.prototype.norm = function() {
 };
 
 RiemannJS.complex.prototype.abs = function() {
-  return Math.sqrt(this.norm());
+  return Math.sqrt(Math.pow(this.r,2.0)+Math.pow(this.i,2.0));
 };
 
 RiemannJS.complex.prototype.inverse = function() {
@@ -92,18 +76,66 @@ RiemannJS.complex.prototype.accum = function(z) {
 };
 
 RiemannJS.complex.prototype.exp = function() {
-  var vz = new RiemannJS.complex(1e-100,this.i);
-  var va = vz.abs();
-  return vz.div(va)
-    .mul( Math.sin(va) )
-    .add( Math.cos(va) )
-    .mul( Math.pow(Math.E, this.r) );
+  //(exp(re(x))*cos(im(x)), exp(re(x))*sin(im(x)))
+  var a = Math.exp(this.r);
+  return new RiemannJS.complex(
+      a*Math.cos(this.i),
+      a*Math.sin(this.i));
+
+  //var vz = new RiemannJS.complex(1e-100,this.i);
+  //var va = vz.abs();
+
+  //return vz.div(va)
+  //  .mul( Math.sin(va) )
+  //  .add( Math.cos(va) )
+  //  .mul( Math.pow(Math.E, this.r) );
 };
 
 RiemannJS.complex.prototype.ln = function() {
   return new RiemannJS.complex(Math.log(this.abs()), this.arg());
 };
 
+RiemannJS.complex.prototype.sin = function() {
+  var z = new RiemannJS.complex(0,1);
+  var n0 = this.mul(z).exp();
+  z.i = -1;
+  var n1 = this.mul(z).exp();
+  z.i = 2;
+  return n0.sub(n1).div(z);
+};
+
+RiemannJS.complex.prototype.cos = function() {
+  var z = new RiemannJS.complex(0,1);
+  var n0 = this.mul(z).exp();
+  z.i = -1;
+  var n1 = this.mul(z).exp();
+  return n0.add(n1).div(2);
+};
+
+RiemannJS.complex.prototype.tan = function() {
+  return this.sin().div(this.cos());
+};
+
+RiemannJS.complex.prototype.pow = function(z) {
+  if (typeof z == "number") {
+    var a = this.arg() * z;
+    var b = Math.pow(this.abs(),z);
+    return new RiemannJS.complex(b*Math.cos(a), b*Math.sin(a));
+  } else {
+    var a = Math.log(this.abs());
+    var b = this.arg();
+    var c = Math.exp(z.r*a - z.i*b);
+    var d = (z.r*b + z.i*a);
+    return new RiemannJS.complex(c*Math.cos(d),c*Math.sin(d));
+    //return z.mul(this.ln()).exp();
+  }
+};
+
+RiemannJS.complex.prototype.root = function(n) {
+  var a = this.arg();
+  var w = new RiemannJS.complex(Math.cos(a/n), Math.sin(a/n));
+  return w.mul(Math.pow(this.abs(),1.0/n));
+};
 
 RiemannJS.complex.__display_modes__ = [ 'rectangular', 'polar' ];
 RiemannJS.complex.__display_mode__ = RiemannJS.complex.__display_modes__[0];
